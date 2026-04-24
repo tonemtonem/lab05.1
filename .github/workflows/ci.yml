@@ -35,10 +35,10 @@ jobs:
     - name: Generate Coverage Report
       run: |
         cd build
-        gcovr -r .. --xml --output coverage.xml --exclude '.*tests.*'
+        gcovr -r .. --lcov --output coverage.info --exclude '.*tests.*' --exclude '.*_deps.*'
 
     - name: Upload to Coveralls
       uses: coverallsapp/github-action@v2
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./build/coverage.xml
+        file: ./build/coverage.info
